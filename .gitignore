@@ -1,0 +1,21 @@
+# 忽略插件目录 (由 lazy.nvim 自动管理)
+lazy/
+
+# 编译/缓存文件
+*.o
+*.obj
+*.swp
+*.swo
+*~
+
+# vim/neovim 缓存
+/doc/tags
+/plugin/pack/*/opt/*/doc/tags
+
+# spell 文件
+/spell/*.spl
+/spell/*.sug
+
+# 临时会话文件
+Session.vim
+
