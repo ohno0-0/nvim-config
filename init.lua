@@ -58,6 +58,15 @@ vim.opt.termguicolors = true
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "保存文件" })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = "退出" })
 
+-- 设置新的映射，例如 Ctrl + /
+vim.keymap.set({'n', 'x'}, '<C-/>', 'gcc', { remap = true })
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
+vim.keymap.set('x', '<C-/>', 'gc', { remap = true })
+
+-- 在 Visual 模式下保持缩进后的选中状态
+vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
+vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
+
 -- 窗口导航
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "移到左边窗口" })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "移到右边窗口" })
