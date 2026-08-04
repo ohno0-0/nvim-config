@@ -44,7 +44,11 @@ return {
 
         -- 5. 启动 LSP 服务器 (传入 capabilities)
         local lspconfig = require("lspconfig")
-        lspconfig.clangd.setup { capabilities = capabilities }
+        lspconfig.clangd.setup {
+          capabilities = capabilities,
+          -- background-index: 让 clangd 预建全工程符号索引,跨文件跳转(如 page_alloc.c -> vmscan.c)才可靠
+          cmd = { "clangd", "--background-index", "--pch-storage=memory", "--limit-results=0" },
+        }
         lspconfig.pyright.setup { capabilities = capabilities }
       end,
     },
