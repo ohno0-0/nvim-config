@@ -44,6 +44,11 @@ vim.schedule(function()
   require "mappings"
 end)
 
+-- 针对特定文件类型开启,用于禁止光标移动时意外改变缩进
+vim.cmd([[
+  autocmd FileType c,cpp,java,javascript setlocal cindent
+]])
+
 -- ai给的设置
 -- 开启相对行号,不好用,置为false
 vim.opt.relativenumber = false
@@ -53,6 +58,9 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 -- 开启真彩色支持
 vim.opt.termguicolors = true
+-- 开启自动缩进与智能缩进,解决切行缩进不见的问题
+vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 -- 普通模式映射
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "保存文件" })

@@ -31,6 +31,28 @@ return {
       -- 键位映射 (示例)
       local dap = require("dap")
       local dapui = require("dapui")
+
+      -- codelldb 适配器（显式配置，不依赖 automatic_setup）
+      dap.adapters.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+          args = { "--port", "${port}" },
+        },
+      }
+
+      -- C++ 调试配置：VisualCatcher Debug 构建（含 ASAN）
+      dap.configurations.cpp = {
+        {
+          name = "Launch VisualCatcher",
+          type = "codelldb",
+          request = "launch",
+          program = "/home/zgf/workpiece/VisualCatcher/build/bin/Debug/VisualCatcherApp_d",
+          cwd = "/home/zgf/workpiece/VisualCatcher/build/bin/Debug",
+        },
+      }
+
       
       -- 打开/关闭调试界面
       vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
@@ -57,5 +79,7 @@ return {
   
   -- Mason 插件 (用于管理 LSP 和 DAP 适配器)
   { "williamboman/mason.nvim" },
-  { "jay-babu/mason-nvim-dap" },
+  { "jay-babu/mason-nvim-dap",
+    url = "git@github.com:jay-babu/mason-nvim-dap.nvim.git",
+  },
 }

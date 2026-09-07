@@ -6,7 +6,12 @@ return {
     build = ":TSUpdate",
     config = function()
         local treesitter = require("nvim-treesitter")
-        treesitter.setup()
+        treesitter.setup{
+            indent = {
+                enable = true,  -- 启用缩进模块
+                disable = {},   -- 禁用缩进的语言列表（可选）
+            }
+        }
         treesitter.install { 'c', 'cpp', 'python' }
         
         vim.api.nvim_create_autocmd('FileType', {
